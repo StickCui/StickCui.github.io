@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="目录   Part I 组织文本   一、文字处理  1.1 文字间隔 1.2 字体设置 1.3 下划线和正文字号    二、段落设置  2.1 普通段落排版 2.2 计数器 2.3 环境类排版 2.4 边/脚注与垂直间距    三、标题结构   四、页面格式  4.1 文档类选项 4.2 页面尺寸 4.3 页眉页脚 4.4 分栏控制      Part II 自动化排版  一、关于目录    参">
+<meta name="keywords" content="LaTeX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="$\LaTeX$学习笔记">
+<meta property="og:url" content="https://stickcui.github.io/2017/09/26/LaTeX学习笔记/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="目录   Part I 组织文本   一、文字处理  1.1 文字间隔 1.2 字体设置 1.3 下划线和正文字号    二、段落设置  2.1 普通段落排版 2.2 计数器 2.3 环境类排版 2.4 边/脚注与垂直间距    三、标题结构   四、页面格式  4.1 文档类选项 4.2 页面尺寸 4.3 页眉页脚 4.4 分栏控制      Part II 自动化排版  一、关于目录    参">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-09T14:45:01.267Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="$\LaTeX$学习笔记">
+<meta name="twitter:description" content="目录   Part I 组织文本   一、文字处理  1.1 文字间隔 1.2 字体设置 1.3 下划线和正文字号    二、段落设置  2.1 普通段落排版 2.2 计数器 2.3 环境类排版 2.4 边/脚注与垂直间距    三、标题结构   四、页面格式  4.1 文档类选项 4.2 页面尺寸 4.3 页眉页脚 4.4 分栏控制      Part II 自动化排版  一、关于目录    参">
+  <link rel="canonical" href="https://stickcui.github.io/2017/09/26/LaTeX学习笔记/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>$\LaTeX$学习笔记 | Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://stickcui.github.io/2017/09/26/LaTeX学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Stick Cui">
+      <meta itemprop="description" content="Everything is the begining.">
+      <meta itemprop="image" content="/images/avatar_stick.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">$\LaTeX$学习笔记
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-26 23:45:33" itemprop="dateCreated datePublished" datetime="2017-09-26T23:45:33+08:00">2017-09-26</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-09 22:45:01" itemprop="dateModified" datetime="2019-11-09T22:45:01+08:00">2019-11-09</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LaTeX/" itemprop="url" rel="index"><span itemprop="name">LaTeX</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>8.1k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>7 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="chap-0">目录</h1>
+<ul>
+<li>
+<p><a href="#chap-1">Part I 组织文本</a></p>
+<ul>
+<li>
+<p><a href="#sec-1">一、文字处理</a></p>
+<ul>
+<li><a href="#subsec-1.1">1.1 文字间隔</a></li>
+<li><a href="#subsec-1.2">1.2 字体设置</a></li>
+<li><a href="#subsec-1.3">1.3 下划线和正文字号</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#sec-2">二、段落设置</a></p>
+<ul>
+<li><a href="#subsec-2.1">2.1 普通段落排版</a></li>
+<li><a href="#subsec-2.2">2.2 计数器</a></li>
+<li><a href="#subsec-2.3">2.3 环境类排版</a></li>
+<li><a href="#subsec-2.4">2.4 边/脚注与垂直间距</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#sec-3">三、标题结构</a></p>
+</li>
+<li>
+<p><a href="#sec-4">四、页面格式</a></p>
+<ul>
+<li><a href="#subsec-4.1">4.1 文档类选项</a></li>
+<li><a href="#subsec-4.2">4.2 页面尺寸</a></li>
+<li><a href="#subsec-4.3">4.3 页眉页脚</a></li>
+<li><a href="#subsec-4.4">4.4 分栏控制</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#chap-2">Part II 自动化排版</a></p>
+<ul>
+<li><a href="#c2sec-1">一、关于目录</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#Reference">参考文献</a></p>
+</li>
+</ul>
+<hr>
+<a id="more"></a>
+<h1 id="chap-1">Part I 组织文本<a href="#jumpLaTeX">$^{[1]}$</a></h1>
+<h2 id="sec-1">一、文字处理</h2>
+<h3 id="subsec-1.1">1.1 文字间隔</h3>
+<ul>
+<li><code>%</code> 注释放在末尾可以消除掉因换行产生的多余空格</li>
+<li><code>\,</code> 可以产生很小的间隔：多用于防止符号连接</li>
+<li>对于防止连字方面，可以使用 <code>\/</code> 或者 <code>{}</code> 进行分隔</li>
+<li><code>~</code> 不可断空格</li>
+<li>使用 <code>xeCJK</code> 宏包时，要忽略汉字与其他西文字符之间的自动空格可用盒子 <code>\mbox{}</code>，例如：</li>
+</ul>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">mbox</span><span class="string">&#123;真棒&#125;</span></span>-b</span><br></pre></td></tr></table></figure>
+<ul>
+<li>连字符： <code>-</code> ; 范围： <code>--</code> ; 破折号： <code>---</code> .</li>
+<li>在控制连字方面，宏包 <code>fontspec</code> 中的 <code>[Ligature]</code> 字体选项能选择<strong>连字</strong>的程度（XeTeX引擎 OpenType字体情况下）</li>
+<li>文字隐形命令 <code>\phantom{}</code></li>
+</ul>
+<h3 id="subsec-1.2">1.2 字体设置</h3>
+<ul>
+<li>查看系统字体命令[cmd]: <code>fc-list</code> ，例如查看<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>TeX</mtext></mrow><annotation encoding="application/x-tex">\TeX</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.89883em;vertical-align:-0.2155em;"></span><span class="mord text"><span class="mord textrm">T</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.46782999999999997em;"><span style="top:-2.7845em;"><span class="pstrut" style="height:3em;"></span><span class="mord text"><span class="mord textrm">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2155em;"><span></span></span></span></span><span class="mspace" style="margin-right:-0.125em;"></span><span class="mord textrm">X</span></span></span></span></span>预装字体以及系统已装的矢量字体</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">fc</span>-list -f <span class="string">"%&#123;family&#125;\n"</span> :outline &gt; fontlist.txt</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置字体：借助宏包 <code>fontspec</code> 可选参数<code>[no-math]</code></li>
+</ul>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">setmainfont</span><span class="string">[&lt;可选参数&gt;]</span><span class="string">&#123;&lt;字体名&gt;&#125;</span></span> <span class="comment">%正文罗马字体族</span></span><br><span class="line"><span class="tag">\<span class="name">setsansfont</span><span class="string">[&lt;可选参数&gt;]</span><span class="string">&#123;&lt;字体名&gt;&#125;</span></span> <span class="comment">%无衬线字体族</span></span><br><span class="line"><span class="tag">\<span class="name">setmonofont</span><span class="string">[&lt;可选参数&gt;]</span><span class="string">&#123;&lt;字体名&gt;&#125;</span></span> <span class="comment">%打印机字体族</span></span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">newfontfamily</span></span>&lt;命令&gt;[]&#123;&#125; <span class="comment">%设置新的字体族命令</span></span><br></pre></td></tr></table></figure>
+<p>  在CTeX套件中对应设置项为：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">setCJKmainfont</span><span class="string">[&lt;可选参数&gt;]</span><span class="string">&#123;&lt;字体名&gt;&#125;</span></span> <span class="comment">%正文罗马字体族</span></span><br><span class="line"><span class="tag">\<span class="name">setCJKsansfont</span><span class="string">[&lt;可选参数&gt;]</span><span class="string">&#123;&lt;字体名&gt;&#125;</span></span> <span class="comment">%无衬线字体族</span></span><br><span class="line"><span class="tag">\<span class="name">setCJKmonofont</span><span class="string">[&lt;可选参数&gt;]</span><span class="string">&#123;&lt;字体名&gt;&#125;</span></span> <span class="comment">%打印机字体族</span></span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">setCJKfamilyfont</span><span class="string">&#123;&lt;中文字体族名称&gt;&#125;</span><span class="string">[]</span><span class="string">&#123;&lt;字体名&gt;&#125;</span></span></span><br></pre></td></tr></table></figure>
+<p>  举了例子</p>
+  <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">setCJKmainfont</span><span class="string">[BoldFont=SimHei,ItalicFont=KaiTi,BoldItalicFont=LiShu]</span><span class="string">&#123;SimSun&#125;</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>重新定义默认字体族<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">renewcommand</span></span><span class="tag">\<span class="name">rmdefault</span><span class="string">&#123;&#125;</span></span> <span class="comment">%修改\rmfamily</span></span><br><span class="line"><span class="tag">\<span class="name">renewcommand</span></span><span class="tag">\<span class="name">sfdefault</span><span class="string">&#123;&#125;</span></span> <span class="comment">%修改\sffamily</span></span><br><span class="line"><span class="tag">\<span class="name">renewcommand</span></span><span class="tag">\<span class="name">ttdefault</span><span class="string">&#123;&#125;</span></span> <span class="comment">%修改\ttfamily</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>  在CTeX套件中对应设置项为：</p>
+  <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">renewcommand</span></span><span class="tag">\<span class="name">CJKrmdefault</span><span class="string">&#123;&#125;</span></span> <span class="comment">%修改\CJKrmfamily</span></span><br><span class="line"><span class="tag">\<span class="name">renewcommand</span></span><span class="tag">\<span class="name">CJKsfdefault</span><span class="string">&#123;&#125;</span></span> <span class="comment">%修改\CJKsffamily</span></span><br><span class="line"><span class="tag">\<span class="name">renewcommand</span></span><span class="tag">\<span class="name">CJKttdefault</span><span class="string">&#123;&#125;</span></span> <span class="comment">%修改\CJKttfamily</span></span><br><span class="line"><span class="tag">\<span class="name">renewcommand</span></span><span class="tag">\<span class="name">CJKfamilydefault</span><span class="string">&#123;&#125;</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="subsec-1.3">1.3 下划线和正文字号</h3>
+<ul>
+<li>
+<p>下划线推荐使用：</p>
+<p>西文 - <code>ulem</code> 宏包的 <code>\uline</code> <code>\uuline</code> <code>\uwave</code> 等；</p>
+<p>中文 - <code>CJKfntef</code> 宏包中的 <code>\CJKunderdot</code> <code>\CJKunderline</code> <code>\CJKunderdblline</code> <code>\CJKunderwave</code> <code>\CJKsout</code>等；</p>
+</li>
+<li>
+<p>字号选择：</p>
+<p><code>\documentclass[&lt;参数&gt;]{&lt;文档类型&gt;}</code> 参数部分可设置全文默认正文字体字号；</p>
+<p>在CTeX套件中提供了 <code>c5size</code> - 默认设置，五号字体； <code>cs4size</code> - 小四号字体。</p>
+</li>
+</ul>
+<h2 id="sec-2">二、段落设置</h2>
+<h3 id="subsec-2.1">2.1 普通段落排版</h3>
+<ul>
+<li>
+<p>行距设置：</p>
+<p>自定义行距： <code>\linespread{&lt;因子&gt;} %默认因子为1.3</code></p>
+<p>此外宏包 <code>setspace</code> 能够保证数学公式等的行距也相对合理，命令 <code>\setstretch{&lt;因子&gt;}</code></p>
+</li>
+<li>
+<p>单段落悬挂缩进</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">hangafter</span> = </span>±n <span class="comment">% 作用于段落行数；正值：n行之后；负值前n行；</span></span><br><span class="line"><span class="tag">\<span class="name">hangindent</span> = </span>±npc <span class="comment">%缩进距离；正值在左侧；负值在右侧；</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>首字下沉</p>
+<p>推荐使用宏包 <code>lettrine</code> 的 <code>\lettrine{}{}</code> 命令</p>
+</li>
+<li>
+<p>特殊形状段落</p>
+<p>宏包 <code>shapepar</code> 中的 <code>\parshape</code>；例如：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">heartpar</span><span class="string">&#123;%</span></span></span><br><span class="line"><span class="tag"><span class="string">内容</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="subsec-2.2">2.2 计数器</h3>
+<p>宏包 <code>calc</code> 提供了有关长度和计数器计算的简单功能</p>
+<p>计数器设计：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">newcounter</span><span class="string">&#123;&lt;计数器名称&gt;&#125;</span><span class="string">[&lt;可选参数：依赖的计数器名称&gt;]</span></span></span><br><span class="line"><span class="tag">\<span class="name">setcounter</span><span class="string">&#123;&lt;计数器名称&gt;&#125;</span><span class="string">&#123;&lt;值&gt;&#125;</span></span> <span class="comment">%设置起始值或指定值</span></span><br><span class="line"><span class="tag">\<span class="name">stepcounter</span><span class="string">&#123;&lt;计数器名称&gt;&#125;</span></span> <span class="comment">%计数器自加1</span></span><br><span class="line"><span class="tag">\<span class="name">addtocounter</span><span class="string">&#123;&lt;计数器名称&gt;&#125;</span><span class="string">&#123;&lt;值&gt;&#125;</span></span> <span class="comment">%给计数器加上指定值</span></span><br></pre></td></tr></table></figure>
+<h3 id="subsec-2.3">2.3 环境类排版</h3>
+<ul>
+<li>
+<p>定理类环境（默认有）</p>
+<ol>
+<li>
+<p>通过 <code>theorem</code> 宏包设置： <code>\theoremstyle{&lt;参数&gt;}</code></p>
+<p>其中参数有：</p>
+<blockquote>
+<p>plain 默认<br><br>
+break 定理头换行<br><br>
+marginbreank 编号在页边，定理头换行<br><br>
+changebreak 定理头编号在前文字在后，换行<br><br>
+change 定理头编号在前文字在后，不换行<br><br>
+margin 编号在页边，定理头不换行</p>
+</blockquote>
+</li>
+<li>
+<p>通过 <code>ntheorem</code> 宏包设置： <code>\theoremstyle{&lt;参数&gt;}</code>；参数同上，又新增了些<br>
+其中新增参数有：</p>
+<blockquote>
+<p>nonumberplain 无编号<br><br>
+nonumber 无编号，定理头换行<br><br>
+empty 空的</p>
+</blockquote>
+<p>此外，还添加了 <code>[thmmarks]</code> 选项，可使用 <code>\theoremsymbol</code> 设置末尾添加结尾符号。</p>
+</li>
+</ol>
+</li>
+<li>
+<p>抄录</p>
+<ol>
+<li>
+<p>简单抄录命令： <code>\verb&lt;符号&gt;&lt;抄录内容&gt;&lt;符号&gt;</code> %带*命令可使抄录内容空格可见</p>
+</li>
+<li>
+<p>简单抄录环境： <code>verbatim</code> % 带*号环境作用同上；</p>
+<p><strong>注：以上为特殊命令，不可作为其他命令参数</strong></p>
+<p>宏包 <code>fancyvrb</code> 提供了 <code>verbatim</code> 环境扩展。</p>
+</li>
+<li>
+<p>代码抄录环境： <code>listings</code> 宏包的 <code>lstlisting</code> 环境</p>
+<blockquote>
+<p>lstlisting 环境全局设置；以下仅列部分</p>
+</blockquote>
+ <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">lstset</span><span class="string">&#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">  basicstyle = &lt;&gt;, % 整体格式，例如：\sffamily</span></span></span><br><span class="line"><span class="tag"><span class="string">  keywordstyle = &lt;&gt;, % 关键字格式，例如：\bfseries</span></span></span><br><span class="line"><span class="tag"><span class="string">  identifierstyle = &lt;&gt;, % 标识符格式</span></span></span><br><span class="line"><span class="tag"><span class="string">  stringstyle = &lt;&gt;, % 字符串格式，例如：\ttfamily</span></span></span><br><span class="line"><span class="tag"><span class="string">  commentstyle = &lt;&gt;, % 注释格式，例如：\rmfamily\itshape</span></span></span><br><span class="line"><span class="tag"><span class="string">  column = flexible, % 设置列对齐为非等宽，默认为fixd</span></span></span><br><span class="line"><span class="tag"><span class="string">  % flexible columns, % 作用同上</span></span></span><br><span class="line"><span class="tag"><span class="string">  numbers = left, % 行编号在左边，默认为 none，可选 right</span></span></span><br><span class="line"><span class="tag"><span class="string">  numberstyle = &lt;&gt;, % 行号格式</span></span></span><br><span class="line"><span class="tag"><span class="string">  escapechar = ` % 转义字符设置，xeCJK v3.2.2 以后无需设置</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br></pre></td></tr></table></figure>
+<p>命令：类 <code>\verb</code> 的命令为 <code>\lstinline&lt;符号&gt;&lt;代码&gt;&lt;符号&gt;</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p>制表位排版</p>
+<p><code>tabbing</code> 环境，行用 <code>\\</code> 分隔， <code>\=</code> 设置制表位</p>
+<blockquote>
+<p><code>\'</code> 使其前后文字以当前制表位为中心对齐</p>
+<p><code>\`</code> 后面文字右对齐</p>
+<p><code>\&lt;</code> 与 <code>\&gt;</code> 相反，向前跳一个制表位</p>
+<p><code>\+</code> 后面行向后跳一个制表位</p>
+<p><code>\-</code> 与上相反</p>
+<p><code>\pushtabs</code> 保存当前制表位</p>
+<p><code>poptabs</code> 恢复上边保存的制表位</p>
+</blockquote>
+<p>可借助算法宏包 <code>clrcode</code> 、<code>algorithm2e</code>（广泛） 、<code>algorithmicx</code> 排版算法</p>
+</li>
+</ul>
+<h3 id="subsec-2.4">2.4 边/脚注与垂直间距</h3>
+<ul>
+<li>
+<p>脚注与边注</p>
+<ol>
+<li>
+<p>脚注编号由 <code>\thefootnote</code> 控制，可重定义</p>
+<p>例如带圈编号：<code>\renewcommand\thefootnote{\textcircled{\arabic{footnote}}}</code></p>
+<p><code>pifont</code> 宏包提供的更好，`</p>
+<p>\renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}`</p>
+<p>标题使用脚注需要保护，防止写入目录：<code>\section[节标题]{节标题\protect\footnote{脚注内容}}</code></p>
+</li>
+<li>
+<p>边注 <code>\marginpar{}</code>，<code>\marginpar[左侧内容]{右侧内容}</code>（双面模式）</p>
+<p>宏包 <code>marginnote</code> 的 <code>\marginnote</code> 命令可以禁止不需要的浮动。</p>
+<blockquote>
+<p><code>\reversemarginpar</code> 改变边注的左右位置<br><br>
+<code>\normalmarginpar</code> 复原编著的左右位置<br><br>
+<code>\marginparwidth</code> 边注宽度，可通过 <code>\setlength</code> 或者宏包 <code>geometry</code> 设置<br><br>
+<code>\marginparsep</code> 边注与正文距离，可通过 <code>\setlength</code> 或者宏包 <code>geometry</code> 设置<br><br>
+<code>\marginparpush</code> 边注见最小距离，可通过 <code>\setlength</code> 设置</p>
+</blockquote>
+<p><strong>注： <code>endnotes</code> 宏包提供了尾注功能</strong></p>
+</li>
+</ol>
+</li>
+<li>
+<p>垂直间距</p>
+<ol>
+<li>
+<p><code>\vfill = \vspace{\fill}</code> <code>\hfill = \hspace{\fill}</code></p>
+</li>
+<li>
+<p><code>\raggedbottom</code> 页面内容保持自然高度，底部空白填满</p>
+<p><code>\flushbottom</code> 页面内容在高度上均匀填满</p>
+</li>
+<li>
+<p><code>\pagebreak[&lt;0~4&gt;]</code> 断页位置，0 允许，4 必须断页（默认值）；相反的 <code>\nopagebreak</code></p>
+</li>
+<li>
+<p>若剩孤行未排序，可用 <code>\enlargethispage{长度}</code> ，提高版心内容，带*号的命令还会适当缩小行距。</p>
+</li>
+<li>
+<p><code>\clearpage</code> 与 <code>\newpage</code> 类似，还会清理浮动体<br>
+<code>\cleardoublepage</code> 双面文档模式，奇数页会多分一页</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="sec-3">三、标题结构</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">层次</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-1</td>
+<td style="text-align:center">part(部分)</td>
+<td style="text-align:center">\part</td>
+<td style="text-align:center">可选的最高层</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">chapter(章)</td>
+<td style="text-align:center">\chapter</td>
+<td style="text-align:center">report,book最高层</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">section(节)</td>
+<td style="text-align:center">\section</td>
+<td style="text-align:center">article最高层</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">subsection(小节)</td>
+<td style="text-align:center">\subsection</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">subsubsection(小小节)</td>
+<td style="text-align:center">\subsubsection</td>
+<td style="text-align:center">reprot,book默认不编号不放目录</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">paragraph(段)</td>
+<td style="text-align:center">\paragraph</td>
+<td style="text-align:center">默认不编号，不编目录</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">subparagraph(小段)</td>
+<td style="text-align:center">\subparagraph</td>
+<td style="text-align:center">默认不编号，不编目录</td>
+</tr>
+</tbody>
+</table>
+<p>标题文档格式可通过 <code>titlesec</code> 宏包等修改</p>
+<p>ctex文档类旧版本可通过 <code>\CTEXsetup[&lt;选项&gt;=&lt;值&gt;,……]{&lt;对象&gt;}</code> 去修改；</p>
+<p>新版本可通过 <code>\ctexset{对象={&lt;选项&gt;=&lt;值&gt;,}, 对象/&lt;选项&gt;=&lt;值&gt;,……}</code> 去修改。<br>
+修改方法，可参考相关文档说明（<code>texdoc ctex</code>）</p>
+<h2 id="sec-4">四、页面格式</h2>
+<h3 id="subsec-4.1">4.1 文档类选项</h3>
+<ol>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>LaTeX</mtext></mrow><annotation encoding="application/x-tex">\LaTeX</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.89883em;vertical-align:-0.2155em;"></span><span class="mord text"><span class="mord textrm">L</span><span class="mspace" style="margin-right:-0.36em;"></span><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span style="top:-2.904999em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord text"><span class="mord textrm sizing reset-size6 size3">A</span></span></span></span></span></span><span class="mspace" style="margin-right:-0.15em;"></span><span class="mord text"><span class="mord textrm">T</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.46782999999999997em;"><span style="top:-2.7845em;"><span class="pstrut" style="height:3em;"></span><span class="mord text"><span class="mord textrm">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2155em;"><span></span></span></span></span><span class="mspace" style="margin-right:-0.125em;"></span><span class="mord textrm">X</span></span></span></span></span></span><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>ε</mi></mrow><annotation encoding="application/x-tex">2\varepsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">ε</span></span></span></span> 标准文档类的选项</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">类型</th>
+<th style="text-align:center">选项</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">纸张大小</td>
+<td style="text-align:center">a4paper</td>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>21.0</mn><mspace linebreak="newline"></mspace><mo separator="true">,</mo><mi>c</mi><mi>m</mi><mo>×</mo><mn>29.7</mn><mspace linebreak="newline"></mspace><mo separator="true">,</mo><mi>c</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">21.0\\,cm\times 29.7\\,cm</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">1</span><span class="mord">.</span><span class="mord">0</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">9</span><span class="mord">.</span><span class="mord">7</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">m</span></span></span></span></td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">a5paper</td>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>14.8</mn><mspace linebreak="newline"></mspace><mo separator="true">,</mo><mi>c</mi><mi>m</mi><mo>×</mo><mn>21.0</mn><mspace linebreak="newline"></mspace><mo separator="true">,</mo><mi>c</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">14.8\\,cm\times 21.0\\,cm</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">4</span><span class="mord">.</span><span class="mord">8</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">1</span><span class="mord">.</span><span class="mord">0</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">m</span></span></span></span></td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">b5paper</td>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>17.6</mn><mspace linebreak="newline"></mspace><mo separator="true">,</mo><mi>c</mi><mi>m</mi><mo>×</mo><mn>25.0</mn><mspace linebreak="newline"></mspace><mo separator="true">,</mo><mi>c</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">17.6\\,cm\times 25.0\\,cm</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">7</span><span class="mord">.</span><span class="mord">6</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">5</span><span class="mord">.</span><span class="mord">0</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">m</span></span></span></span></td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">letterpaper</td>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>8.5</mn><mspace linebreak="newline"></mspace><mo separator="true">,</mo><mi>i</mi><mi>n</mi><mo>×</mo><mn>11</mn><mspace linebreak="newline"></mspace><mo separator="true">,</mo><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">8.5\\,in\times 11\\,in</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span><span class="mord">.</span><span class="mord">5</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">1</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span> (默认值)</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">leagalpaper</td>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>8.5</mn><mspace linebreak="newline"></mspace><mo separator="true">,</mo><mi>i</mi><mi>n</mi><mo>×</mo><mn>14</mn><mspace linebreak="newline"></mspace><mo separator="true">,</mo><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">8.5\\,in\times14\\,in</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span><span class="mord">.</span><span class="mord">5</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">4</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span></td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">executivepaper</td>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>7.25</mn><mspace linebreak="newline"></mspace><mo separator="true">,</mo><mi>i</mi><mi>n</mi><mo>×</mo><mn>10.5</mn><mspace linebreak="newline"></mspace><mo separator="true">,</mo><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">7.25\\,in\times 10.5\\,in</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">7</span><span class="mord">.</span><span class="mord">2</span><span class="mord">5</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">.</span><span class="mord">5</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span></td>
+</tr>
+<tr>
+<td style="text-align:right">纸张方向</td>
+<td style="text-align:center">landscape</td>
+<td style="text-align:center">横向，即长宽交换（默认无）</td>
+</tr>
+<tr>
+<td style="text-align:right">单双面</td>
+<td style="text-align:center">oneside</td>
+<td style="text-align:center">单面（article、report 默认值）</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">twoside</td>
+<td style="text-align:center">双面，奇偶页不同，对称（book 默认值）</td>
+</tr>
+<tr>
+<td style="text-align:right">字号大小</td>
+<td style="text-align:center">10pt</td>
+<td style="text-align:center">正文字号 10pt ，\large等命令与之相衬（默认值）</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">11pt</td>
+<td style="text-align:center">正文字号 11pt</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">12pt</td>
+<td style="text-align:center">正文字号 12pt</td>
+</tr>
+<tr>
+<td style="text-align:right">分栏</td>
+<td style="text-align:center">onecolumn</td>
+<td style="text-align:center">单栏（默认值）</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">twocolumn</td>
+<td style="text-align:center">双栏</td>
+</tr>
+<tr>
+<td style="text-align:right">标题格式</td>
+<td style="text-align:center">titlepage</td>
+<td style="text-align:center">标题独自成页（report、book 默认值）</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">notitlepage</td>
+<td style="text-align:center">标题不独自成页（article 默认值）</td>
+</tr>
+<tr>
+<td style="text-align:right">章格式</td>
+<td style="text-align:center">openright</td>
+<td style="text-align:center">每章只从奇数页开始（book 默认值）</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">openany</td>
+<td style="text-align:center">每章可从任一页开始（article、report 默认值）</td>
+</tr>
+<tr>
+<td style="text-align:right">公式编号</td>
+<td style="text-align:center">leqno</td>
+<td style="text-align:center">公式编号在左边（默认无，即在右边）</td>
+</tr>
+<tr>
+<td style="text-align:right">公式位置</td>
+<td style="text-align:center">fleqn</td>
+<td style="text-align:center">公式左对齐，固定缩进（默认无，即居中）</td>
+</tr>
+<tr>
+<td style="text-align:right">草稿设置</td>
+<td style="text-align:center">draft</td>
+<td style="text-align:center">草稿，会把行溢出的盒子着重显示为黑块儿</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">final</td>
+<td style="text-align:center">终稿（默认值）</td>
+</tr>
+<tr>
+<td style="text-align:right">参考文献</td>
+<td style="text-align:center">openbib</td>
+<td style="text-align:center">每条文献分多段输出（默认无）</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>ctex 宏包以及文档类的选项</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">类型</th>
+<th style="text-align:center">选项</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">字号大小</td>
+<td style="text-align:center">c5size</td>
+<td style="text-align:center">正文五号字（仅用于文档类，默认值）</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">cs4size</td>
+<td style="text-align:center">正文四号字（仅用于文档）</td>
+</tr>
+<tr>
+<td style="text-align:right">章节标题</td>
+<td style="text-align:center">sub3section</td>
+<td style="text-align:center">使 \paragraph 标题独占一行（仅用于ctexcap及文档类，默认无）</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">sub4section</td>
+<td style="text-align:center">使 \paragraph 和 \subparagraph 标题都独占一行（仅用于ctexcap及文档类,默认无）</td>
+</tr>
+<tr>
+<td style="text-align:right">中文编码</td>
+<td style="text-align:center">GBK</td>
+<td style="text-align:center">使用GBK编码，但对XeTeX无效</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">UTF8</td>
+<td style="text-align:center">使用UTF8编码</td>
+</tr>
+<tr>
+<td style="text-align:right">XeTeX中文字库</td>
+<td style="text-align:center">nofonts</td>
+<td style="text-align:center">不设定中文字体，需要自己在文中定义</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">winfonts</td>
+<td style="text-align:center">设定Windows系统预装字体（默认）</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">adobefonts</td>
+<td style="text-align:center">设定Adobe中文字体</td>
+</tr>
+<tr>
+<td style="text-align:right">排版风格</td>
+<td style="text-align:center">cap</td>
+<td style="text-align:center">使用中文标题、编号、日期等（默认）</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">nocap</td>
+<td style="text-align:center">保留英文标题、编号、日期等</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">punct</td>
+<td style="text-align:center">启用标点压缩（默认值）</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">nopunct</td>
+<td style="text-align:center">关闭标点压缩</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">indent</td>
+<td style="text-align:center">标题后首行缩进（默认值）</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">noindent</td>
+<td style="text-align:center">标题后首行不缩进</td>
+</tr>
+<tr>
+<td style="text-align:right">宏包兼容</td>
+<td style="text-align:center">fancyhdr</td>
+<td style="text-align:center">调用 fancyhdr 并与之兼容（默认无）</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">hyperref</td>
+<td style="text-align:center">调用 hyperref 并自动设置防止标签乱码选项（默认无）</td>
+</tr>
+<tr>
+<td style="text-align:right">$ $</td>
+<td style="text-align:center">fntef</td>
+<td style="text-align:center">调用 CJKfntef 并定义等价的 \CTEX 开头命令（默认无）</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h3 id="subsec-4.2">4.2 页面尺寸</h3>
+<p>使用宏包 <code>geometry</code> ，例如：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">&#123;geometry&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">geometry</span><span class="string">&#123;a4paper,left=3cm,right=3cm,centering&#125;</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="subsec-4.3">4.3 页眉页脚</h3>
+<ul>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>LaTeX</mtext></mrow><annotation encoding="application/x-tex">\LaTeX</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.89883em;vertical-align:-0.2155em;"></span><span class="mord text"><span class="mord textrm">L</span><span class="mspace" style="margin-right:-0.36em;"></span><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span style="top:-2.904999em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord text"><span class="mord textrm sizing reset-size6 size3">A</span></span></span></span></span></span><span class="mspace" style="margin-right:-0.15em;"></span><span class="mord text"><span class="mord textrm">T</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.46782999999999997em;"><span style="top:-2.7845em;"><span class="pstrut" style="height:3em;"></span><span class="mord text"><span class="mord textrm">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2155em;"><span></span></span></span></span><span class="mspace" style="margin-right:-0.125em;"></span><span class="mord textrm">X</span></span></span></span></span></span> 内部页面风格设置</p>
+<blockquote>
+<p><code>\pagestyle{}</code>选项<br><br>
+empty 无页眉页脚<br><br>
+plain 无页眉，页脚居中页码<br><br>
+headings 无页脚，页眉为章节名称、页码<br><br>
+myheadings 无页脚，页眉为页码和自定义内容</p>
+</blockquote>
+<p>其中， <code>myheadings</code> 可有以下设置</p>
+<blockquote>
+<p>单面文档(oneside)：\markright{页眉文字}</p>
+<p>双面文档(twoside)：\markboth{左面页眉}{右面页眉} %左对偶数页，右对奇数页</p>
+</blockquote>
+</li>
+<li>
+<p><code>fancyhdr</code> 宏包提供了fancy风格；<code>\pagestyle{fancy}</code></p>
+<blockquote>
+<p>\lhead{} 页眉左<br><br>
+\chead{} 页眉中<br><br>
+\rhead{} 页眉右<br><br>
+\lfoot{} 页脚左<br><br>
+\cfoot{} 页脚中<br><br>
+\rfoot{} 页脚右<br><br>
+\fancyhead[&lt;位置&gt;]{} 页眉；位置为E、O与L、R、C的组合<br><br>
+\fancyfoot[&lt;位置&gt;]{} 页脚；同上<br><br>
+\fancyhf[&lt;部位位置&gt;]{} 页眉页脚；部位位置为H、F与E、O与L、R、C的组合</p>
+</blockquote>
+<p><strong>注：E为偶数页；O为奇数页。多参数时，使用半角字符逗号分隔</strong></p>
+</li>
+<li>
+<p>在设置页眉页脚时可使用节标题 <code>\rightmark</code> 与章标题 <code>\leftmark</code> (article无)</p>
+</li>
+<li>
+<p>页眉页脚线可有如下设置：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">renewcommand</span></span><span class="tag">\<span class="name">headrulewidth</span><span class="string">&#123;0.6pt&#125;</span></span> <span class="comment">%重定义页眉线粗细，默认0.4pt; 0pt 表示无</span></span><br><span class="line"><span class="tag">\<span class="name">renewcommand</span></span><span class="tag">\<span class="name">footrulewidth</span><span class="string">&#123;0.6pt&#125;</span></span> <span class="comment">%默认0pt</span></span><br></pre></td></tr></table></figure>
+<p><strong>此外，<code>\fancypagestyle{}</code>可重定义原有的风格，通常设置plain</strong></p>
+</li>
+</ul>
+<h3 id="subsec-4.4">4.4 分栏控制</h3>
+<ul>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>LaTeX</mtext></mrow><annotation encoding="application/x-tex">\LaTeX</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.89883em;vertical-align:-0.2155em;"></span><span class="mord text"><span class="mord textrm">L</span><span class="mspace" style="margin-right:-0.36em;"></span><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span style="top:-2.904999em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord text"><span class="mord textrm sizing reset-size6 size3">A</span></span></span></span></span></span><span class="mspace" style="margin-right:-0.15em;"></span><span class="mord text"><span class="mord textrm">T</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.46782999999999997em;"><span style="top:-2.7845em;"><span class="pstrut" style="height:3em;"></span><span class="mord text"><span class="mord textrm">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2155em;"><span></span></span></span></span><span class="mspace" style="margin-right:-0.125em;"></span><span class="mord textrm">X</span></span></span></span></span></span>默认</p>
+<blockquote>
+<ul>
+<li>全文双栏排版：[twocolumn]{文档类型}</li>
+<li>使用命令 <code>\twocolumn</code> 和 <code>\onecolumn</code> 分别进入双/单栏模式（都会先换页）<br>
+<code>\twocolumn[可选参数]</code> 例如：<code>\twocolumn[\maketitle]</code> 适用于通栏标题</li>
+<li>双栏模式下，<code>\newpage</code> 与 <code>\pagebreak</code> 只表示分栏<br>
+<code>\clearpage</code> 与 <code>\cleardoublepage</code> 完成分页等。</li>
+<li>栏间距由 <code>\columnsep</code> 控制，可通过 <code>\setlength</code> 修改<br>
+栏宽 <code>\columnwidth</code> 可应用于它出，不要修改</li>
+<li>栏与栏之间的长线由 <code>\columnseprule</code> 控制；默认 0pt，即没有</li>
+<li>双栏内容默认不均衡，可使用 <code>balance</code> 宏包的 <code>\balance</code> 命令（导言）控制平衡</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p><code>multicol</code> 宏包可不分页，默认平衡</p>
+<p><code>multicols</code> 环境内不能使用浮动体与边注！！！</p>
+<p>例如：<code>\begin{multicols}{3}</code> 分三栏</p>
+<p>其内部不再使用 <code>\newpage</code> 分栏 而是用 <code>\columnbreak</code>.</p>
+</li>
+</ul>
+<h1 id="chap-2">Part II 自动化排版</h1>
+<h2 id="c2sec-1">一、关于目录</h2>
+<h3 id="c2subsec-1.1">1.1 内容定制</h3>
+1. 修改目录深度
+<pre><code>`\setcounter{secnumdepth}{4} % 增加编号深度`&lt;br&gt;
+`\setcounter{tocdepth}{4} 	% 增加目录深度`
+</code></pre>
+<ol start="2">
+<li>
+<p>正文中手工加一条目录</p>
+<p><code>\addcontentsline{&lt;文件&gt;}{&lt;类型&gt;}{&lt;标题文字&gt;}</code></p>
+<table>
+<thead>
+<tr>
+<th>文件：目录文件扩展名</th>
+<th style="text-align:center">类型：章节或图标命令名</th>
+<th style="text-align:center">标题文字：目录项标题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>oc --&gt; 章节目录</td>
+<td style="text-align:center">chapter</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td>of --&gt; 图目录</td>
+<td style="text-align:center">section</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td>ot --&gt; 表目录</td>
+<td style="text-align:center">figure</td>
+<td style="text-align:center">-</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注：可用此法将标题与目录本身也添加至目录</strong></p>
+</li>
+<li>
+<p><code>tocbibind</code> 宏包默认章节目录、图表目录、文献、索引等都加入章节目录；设置参数如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">参数</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:right">参数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">otbib</td>
+<td style="text-align:left">不加入参考文献</td>
+<td style="text-align:right">chapter</td>
+<td style="text-align:left">使用 <code>\chapter</code> 样式（仅对book、article类）</td>
+</tr>
+<tr>
+<td style="text-align:right">otindex</td>
+<td style="text-align:left">不加入索引</td>
+<td style="text-align:right">section</td>
+<td style="text-align:left">使用 <code>\section</code> 样式</td>
+</tr>
+<tr>
+<td style="text-align:right">ottoc</td>
+<td style="text-align:left">不加入章节目录</td>
+<td style="text-align:right">numbib</td>
+<td style="text-align:left">对参考文献按章节编号（默认无）</td>
+</tr>
+<tr>
+<td style="text-align:right">otlot</td>
+<td style="text-align:left">不加入表目录</td>
+<td style="text-align:right">numindex</td>
+<td style="text-align:left">对索引按章节编号（默认无）</td>
+</tr>
+<tr>
+<td style="text-align:right">otlof</td>
+<td style="text-align:left">不加入图目录</td>
+<td style="text-align:right">-</td>
+<td style="text-align:left">-</td>
+</tr>
+<tr>
+<td style="text-align:right">one</td>
+<td style="text-align:left">以上项目（左）都不加入</td>
+<td style="text-align:right">-</td>
+<td style="text-align:left">-</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><code>\addtocontents{&lt;文件&gt;}{&lt;内容&gt;}</code> 可将任何内容加在目录中<br><br>
+例如：</p>
+</li>
+</ol>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">………… <span class="comment">% Other contents</span></span><br><span class="line"><span class="tag">\<span class="name">addtocontents</span><span class="string">&#123;toc&#125;</span><span class="string">&#123;\protext\newpage&#125;</span></span> <span class="comment">%目录在此处换页</span></span><br><span class="line"><span class="tag">\<span class="name">part</span><span class="string">&#123;...&#125;</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="c2subsec-1.2">1.2 格式定制</h3>
+<p>关于目录格式的自定义，宏包 <code>tocloft</code> 与 <code>titletoc</code> 都可以解决；后者比较麻烦，以后慢慢研究</p>
+<h1 id="Reference">参考文献</h1>
+<p><span id="jumpLaTeX"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">1</span><span class="mclose">]</span></span></span></span></span> 刘海洋. <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>LaTeX</mtext></mrow><annotation encoding="application/x-tex">\LaTeX</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.89883em;vertical-align:-0.2155em;"></span><span class="mord text"><span class="mord textrm">L</span><span class="mspace" style="margin-right:-0.36em;"></span><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span style="top:-2.904999em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord text"><span class="mord textrm sizing reset-size6 size3">A</span></span></span></span></span></span><span class="mspace" style="margin-right:-0.15em;"></span><span class="mord text"><span class="mord textrm">T</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.46782999999999997em;"><span style="top:-2.7845em;"><span class="pstrut" style="height:3em;"></span><span class="mord text"><span class="mord textrm">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2155em;"><span></span></span></span></span><span class="mspace" style="margin-right:-0.125em;"></span><span class="mord textrm">X</span></span></span></span></span></span> 入门[M]. 北京： 电子工业出版社：2013, 6.</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/LaTeX/" rel="tag"># LaTeX</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/10/15/hello-world/" rel="prev" title="Hello World">
+                  Hello World <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#chap-0"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#chap-1"><span class="nav-number">2.</span> <span class="nav-text">Part I 组织文本$^{[1]}$</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sec-1"><span class="nav-number">2.1.</span> <span class="nav-text">一、文字处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#subsec-1.1"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1 文字间隔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subsec-1.2"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.2 字体设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subsec-1.3"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.3 下划线和正文字号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sec-2"><span class="nav-number">2.2.</span> <span class="nav-text">二、段落设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#subsec-2.1"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 普通段落排版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subsec-2.2"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subsec-2.3"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3 环境类排版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subsec-2.4"><span class="nav-number">2.2.4.</span> <span class="nav-text">2.4 边/脚注与垂直间距</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sec-3"><span class="nav-number">2.3.</span> <span class="nav-text">三、标题结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sec-4"><span class="nav-number">2.4.</span> <span class="nav-text">四、页面格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#subsec-4.1"><span class="nav-number">2.4.1.</span> <span class="nav-text">4.1 文档类选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subsec-4.2"><span class="nav-number">2.4.2.</span> <span class="nav-text">4.2 页面尺寸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subsec-4.3"><span class="nav-number">2.4.3.</span> <span class="nav-text">4.3 页眉页脚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subsec-4.4"><span class="nav-number">2.4.4.</span> <span class="nav-text">4.4 分栏控制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#chap-2"><span class="nav-number">3.</span> <span class="nav-text">Part II 自动化排版</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#c2sec-1"><span class="nav-number">3.1.</span> <span class="nav-text">一、关于目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#c2subsec-1.1"><span class="nav-number">3.1.1.</span> <span class="nav-text">1.1 内容定制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c2subsec-1.2"><span class="nav-number">3.1.2.</span> <span class="nav-text">1.2 格式定制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar_stick.jpg"
+      alt="Stick Cui">
+  <p class="site-author-name" itemprop="name">Stick Cui</p>
+  <div class="site-description" itemprop="description">Everything is the begining.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/StickCui" title="GitHub &rarr; https://github.com/StickCui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stick Cui</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">9k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">8 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+  <script src="//cdn.jsdelivr.net/npm/katex@0/dist/contrib/copy-tex.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/contrib/copy-tex.min.css">
+
+    
+  
+
+  
+
+  
+
+</body>
+</html>

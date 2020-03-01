@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="1. 前言 作为一个新手，安装 hexo 的过程并不是很顺利的；写下本文，记录下自己在 Ubuntu 上配置的细节，以便于自己今后的恢复工作。  2. 安装  2.1 依赖安装 hexo 是基于 Node.js 的，安装 hexo 之前要先安装 Node.js 本人直接下载的针对Linux的64位安装包，解压到~/.local文件夹下，直接使用的user模式。 测试安装成功与否： 1npm --">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo的安装之路">
+<meta property="og:url" content="https://stickcui.github.io/2017/09/24/hexo的安装之路/index.html">
+<meta property="og:site_name" content="Stick&#39;s Blog">
+<meta property="og:description" content="1. 前言 作为一个新手，安装 hexo 的过程并不是很顺利的；写下本文，记录下自己在 Ubuntu 上配置的细节，以便于自己今后的恢复工作。  2. 安装  2.1 依赖安装 hexo 是基于 Node.js 的，安装 hexo 之前要先安装 Node.js 本人直接下载的针对Linux的64位安装包，解压到~/.local文件夹下，直接使用的user模式。 测试安装成功与否： 1npm --">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-01T07:39:41.720Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo的安装之路">
+<meta name="twitter:description" content="1. 前言 作为一个新手，安装 hexo 的过程并不是很顺利的；写下本文，记录下自己在 Ubuntu 上配置的细节，以便于自己今后的恢复工作。  2. 安装  2.1 依赖安装 hexo 是基于 Node.js 的，安装 hexo 之前要先安装 Node.js 本人直接下载的针对Linux的64位安装包，解压到~/.local文件夹下，直接使用的user模式。 测试安装成功与否： 1npm --">
+  <link rel="canonical" href="https://stickcui.github.io/2017/09/24/hexo的安装之路/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>hexo的安装之路 | Stick's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Stick's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">学习笔记</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://stickcui.github.io/2017/09/24/hexo的安装之路/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Stick Cui">
+      <meta itemprop="description" content="Everything is the begining.">
+      <meta itemprop="image" content="/uploads/avatar_stick.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stick's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">hexo的安装之路
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-24 23:47:50" itemprop="dateCreated datePublished" datetime="2017-09-24T23:47:50+08:00">2017-09-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-01 15:39:41" itemprop="dateModified" datetime="2020-03-01T15:39:41+08:00">2020-03-01</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>5.3k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>5 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-前言"><a class="markdownIt-Anchor" href="#1-前言"></a> 1. 前言</h1>
+<p>作为一个新手，安装 hexo 的过程并不是很顺利的；写下本文，记录下自己在 Ubuntu 上配置的细节，以便于自己今后的恢复工作。</p>
+<h1 id="2-安装"><a class="markdownIt-Anchor" href="#2-安装"></a> 2. 安装</h1>
+<h2 id="21-依赖安装"><a class="markdownIt-Anchor" href="#21-依赖安装"></a> 2.1 依赖安装</h2>
+<p>hexo 是基于 Node.js 的，安装 hexo 之前要先安装 <a href="http://nodejs.cn/" target="_blank" rel="noopener">Node.js</a></p>
+<p>本人直接下载的针对Linux的64位安装包，解压到<code>~/.local</code>文件夹下，直接使用的user模式。</p>
+<p>测试安装成功与否：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm --version</span><br></pre></td></tr></table></figure>
+<p>以我目前的安装版本为例会显示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3.10.10</span><br></pre></td></tr></table></figure>
+<p>此外，还需要Git的支持，这个不在介绍了。</p>
+<a id="more"></a>
+<h2 id="22-hexo-安装"><a class="markdownIt-Anchor" href="#22-hexo-安装"></a> 2.2 hexo 安装</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+<p>执行<code>hexo -v</code>查看自己的配置</p>
+<h2 id="23-开始使用"><a class="markdownIt-Anchor" href="#23-开始使用"></a> 2.3 开始使用</h2>
+<p>在你所需要的路径下执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
+<p>会在该路径下创建一个名为<code>blog</code>的文件夹，之后的博客网站文件会在该文件夹下；<br>
+然后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>就可以看到一个初始版本的博客网站了，注意以上的<code>hexo server</code>的一个简写版本为<code>hexo s</code>.</p>
+<h2 id="24-安装主题"><a class="markdownIt-Anchor" href="#24-安装主题"></a> 2.4 安装主题</h2>
+<p>以 <code>NexT</code> 主题为例，这里可以参考其<a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">官方教程</a>安装。下面是我的安装过程。</p>
+<p>在blog文件夹下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> themes</span><br><span class="line">mkdir next</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next.git next</span><br><span class="line"><span class="built_in">cd</span> next</span><br><span class="line">git checkout tags/v5.1.0</span><br></pre></td></tr></table></figure>
+<p>其中版本号可以执行<code>git tag -l</code>查看到版本列表。</p>
+<p>打开<code>blog</code>文件夹下的<code>_config.yml</code>文件，将其内的<code>theme:</code>后面修改为<code>next</code>即可。</p>
+<h2 id="25-其他包的安装"><a class="markdownIt-Anchor" href="#25-其他包的安装"></a> 2.5 其他包的安装</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm un hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-markdown-it --save</span><br></pre></td></tr></table></figure>
+<p>解释一下，第一行是为了往其他平台（大部分都是GitHub Pages）发布需要的包；第二行是卸载掉hexo自带的基础markdown解析引擎；第三行是安装丰富解析的markdown-it解析引擎。</p>
+<p>之所以替换，是因为标准的markdown不支持reference引用。替换后记得在<code>_config.yml</code>文件添加</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">markdown:</span></span><br><span class="line"><span class="attr">  render:</span></span><br><span class="line"><span class="attr">    html:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    xhtmlOut:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">    breaks:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">    linkify:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    typographer:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    quotes:</span> <span class="string">'“”‘’'</span></span><br><span class="line"><span class="attr">  plugins:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">markdown-it-footnote</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">markdown-it-sup</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">markdown-it-sub</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">markdown-it-abbr</span></span><br><span class="line">    <span class="comment"># - markdown-it-emoji</span></span><br><span class="line"><span class="attr">  anchors:</span></span><br><span class="line"><span class="attr">    level:</span> <span class="number">2</span></span><br><span class="line"><span class="attr">    collisionSuffix:</span> <span class="string">'v'</span></span><br><span class="line"><span class="attr">    permalink:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    permalinkClass:</span> <span class="string">header-anchor</span></span><br><span class="line"><span class="attr">    permalinkSymbol:</span> <span class="string">¶</span></span><br></pre></td></tr></table></figure>
+<p>以上的<code>markdown-it-emoji</code>注释掉了，因为目前我不需要，主要是支持emoji表情的，如有需要可以执行如下安装<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install markdown-it-emoji --save</span><br></pre></td></tr></table></figure>
+<h1 id="3-配置"><a class="markdownIt-Anchor" href="#3-配置"></a> 3. 配置</h1>
+<h2 id="31-git-配置"><a class="markdownIt-Anchor" href="#31-git-配置"></a> 3.1 Git 配置</h2>
+<p>如果要发布到GitHub Pages上，需要优先配置本地Git连接上<a href="https://github.com" target="_blank" rel="noopener">GitHub</a></p>
+<p>生成密钥(本人使用)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+<p>回车即可，然后会在<code>~/.ssh/</code>目录下创建两个文件：</p>
+<blockquote>
+<p><code>id_rsa</code> 本地私钥</p>
+<p><code>id_rsa.pub</code> 需上传的公钥</p>
+</blockquote>
+<p>将 <code>id_rsa.pub</code> 文件中的内容粘贴到 GitHub 指定配置中即可。</p>
+<p>当然关于密钥这里也可以参考<a href="https://help.github.com/articles/connecting-to-github-with-ssh/" target="_blank" rel="noopener">GitHub官方教程</a>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure>
+<p>本地Git账号密码配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"yourname"</span></span><br><span class="line">git config --global user.email <span class="string">"youremail"</span></span><br></pre></td></tr></table></figure>
+<p>如果忘了自己是否已经配置过可以执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config -l</span><br></pre></td></tr></table></figure>
+<p>查看配置列表。</p>
+<h2 id="32-hexo-基本配置"><a class="markdownIt-Anchor" href="#32-hexo-基本配置"></a> 3.2 hexo 基本配置</h2>
+<h3 id="321-站点相关配置"><a class="markdownIt-Anchor" href="#321-站点相关配置"></a> 3.2.1 站点相关配置：</h3>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">[站点主标题]</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">[站点副标题]</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">[站点描述]</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">[作者]</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">[语言，默认是英文，可修改为：zh-Hans]</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">[站点的时区，可不填]</span></span><br></pre></td></tr></table></figure>
+<h3 id="322-站点url配置"><a class="markdownIt-Anchor" href="#322-站点url配置"></a> 3.2.2 站点URL配置：</h3>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">[站点网址]</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">[站点所在网址的根目录]</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">[永久链接格式，可不做修改]</span></span><br><span class="line"><span class="attr">permalink_defaults:</span> <span class="string">[默认永久链接格式，为空即可]</span></span><br></pre></td></tr></table></figure>
+<p>举个例子：假如你的网址是http://yoursite.com，而你的博客位于该网址的<code>/blog</code>文件夹下则可以有如下设置</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="attr">http://yoursite.com</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/blog</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br></pre></td></tr></table></figure>
+<p>如果是往GitHub Pages上发布的话可以用如下配置：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="attr">http://yourname.github.io</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br></pre></td></tr></table></figure>
+<h3 id="323-deploy配置"><a class="markdownIt-Anchor" href="#323-deploy配置"></a> 3.2.3 Deploy配置：</h3>
+<p>以往GitHub Pages上发布为例</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="attr">https://github.com/yourname/yourname.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<h3 id="324-主题"><a class="markdownIt-Anchor" href="#324-主题"></a> 3.2.4 主题</h3>
+<p>以 <a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">NexT</a> 为例：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
+<h2 id="33-主题配置"><a class="markdownIt-Anchor" href="#33-主题配置"></a> 3.3 主题配置</h2>
+<p>这里主要以 <a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">NexT</a> 为例。</p>
+<h3 id="331-菜单栏配置"><a class="markdownIt-Anchor" href="#331-菜单栏配置"></a> 3.3.1 菜单栏配置</h3>
+<p>按需所取，这里我只用到了分类、归档和标签：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line"><span class="attr">  home:</span> <span class="string">/</span></span><br><span class="line"><span class="attr">  categories:</span> <span class="string">/categories/</span></span><br><span class="line">  <span class="comment">#about: /about/</span></span><br><span class="line"><span class="attr">  archives:</span> <span class="string">/archives/</span></span><br><span class="line"><span class="attr">  tags:</span> <span class="string">/tags/</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml</span></span><br><span class="line">  <span class="comment">#commonweal: /404/</span></span><br></pre></td></tr></table></figure>
+<p>注意：开启新的页面需要执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo hexo new page [page name]</span><br></pre></td></tr></table></figure>
+<p>并对新页面加以配置。以我自己的配置为例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo hexo new page categories</span><br><span class="line">hexo hexo new page tags</span><br></pre></td></tr></table></figure>
+<p>分别打开位于<code>blog/source/categories</code>以及<code>blog/source/tags</code>下的<code>index.md</code> 文件，分别进行以下配置</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">分类</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2017</span><span class="bullet">-09</span><span class="bullet">-20</span> <span class="number">22</span><span class="string">:03:42</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">"categories"</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">标签</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2017</span><span class="bullet">-09</span><span class="bullet">-20</span> <span class="number">22</span><span class="string">:03:42</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">"tags"</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="332-主题风格"><a class="markdownIt-Anchor" href="#332-主题风格"></a> 3.3.2 主题风格</h3>
+<p>个人觉得Pisces好看点：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment">#scheme: Muse</span></span><br><span class="line"><span class="comment">#scheme: Mist</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Pisces</span></span><br><span class="line"><span class="comment">#scheme: Gemini</span></span><br></pre></td></tr></table></figure>
+<h3 id="333-个人社交链接"><a class="markdownIt-Anchor" href="#333-个人社交链接"></a> 3.3.3 个人社交链接</h3>
+<p>按需求来吧：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">social:</span></span><br><span class="line"><span class="attr">    GitHub:</span> <span class="attr">https://github.com/yourname</span></span><br><span class="line"><span class="attr">    Weibo:</span> <span class="attr">https://weibo.com/youruid</span></span><br></pre></td></tr></table></figure>
+<h3 id="334-头像设置"><a class="markdownIt-Anchor" href="#334-头像设置"></a> 3.3.4 头像设置：</h3>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">avatar:</span> <span class="string">/images/avatar.jpg</span></span><br></pre></td></tr></table></figure>
+<p>在主题文件夹下的<code>source/images</code> 文件夹里添加自己的头像，按照上述方式饮用即可。</p>
+<h3 id="335-打赏"><a class="markdownIt-Anchor" href="#335-打赏"></a> 3.3.5 打赏</h3>
+<p>注意：NexT自带的打赏插件，默认只有英文描述，如果需要中文支持需要修改其源代码：<br>
+打开 <code>themes/next/layout/_macro/reward.swig</code> 代码：<br>
+修改其中的</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.wechatpay %&#125;</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"wechat"</span> <span class="attr">style</span>=<span class="string">"display: inline-block"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"wechat_qr"</span> <span class="attr">src</span>=<span class="string">"&#123;&#123; theme.wechatpay &#125;&#125;"</span> <span class="attr">alt</span>=<span class="string">"&#123;&#123; theme.author &#125;&#125; WeChat Pay"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>WeChat Pay<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">    &#123;% if theme.alipay %&#125;</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"alipay"</span> <span class="attr">style</span>=<span class="string">"display: inline-block"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"alipay_qr"</span> <span class="attr">src</span>=<span class="string">"&#123;&#123; theme.alipay &#125;&#125;"</span> <span class="attr">alt</span>=<span class="string">"&#123;&#123; theme.author &#125;&#125; Alipay"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Alipay<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    &#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+<p>为</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.wechatpay %&#125;</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"wechat"</span> <span class="attr">style</span>=<span class="string">"display: inline-block"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"wechat_qr"</span> <span class="attr">src</span>=<span class="string">"&#123;&#123; theme.wechatpay &#125;&#125;"</span> <span class="attr">alt</span>=<span class="string">"&#123;&#123; theme.author &#125;&#125; WeChat Pay"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; theme.reward_wechatpay_name &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">    &#123;% if theme.alipay %&#125;</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"alipay"</span> <span class="attr">style</span>=<span class="string">"display: inline-block"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"alipay_qr"</span> <span class="attr">src</span>=<span class="string">"&#123;&#123; theme.alipay &#125;&#125;"</span> <span class="attr">alt</span>=<span class="string">"&#123;&#123; theme.author &#125;&#125; Alipay"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; theme.reward_alipay_name &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    &#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+<p>即新添加了两个可以配置的变量<code>theme.reward_wechatpay_name</code>以及<code>theme.reward_alipay_name</code>，然后就可以在主题的配置文件中进行如下配置：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Reward</span></span><br><span class="line"><span class="attr">reward_title:</span> <span class="string">打赏</span></span><br><span class="line"><span class="attr">reward_comment:</span> <span class="string">您的支持将鼓励我继续创作！</span></span><br><span class="line"><span class="attr">wechatpay:</span> <span class="string">/images/wechatpay.png</span></span><br><span class="line"><span class="attr">reward_wechatpay_name:</span> <span class="string">微信打赏</span></span><br><span class="line"><span class="attr">alipay:</span> <span class="string">/images/alipay.jpg</span></span><br><span class="line"><span class="attr">reward_alipay_name:</span> <span class="string">支付宝打赏</span></span><br></pre></td></tr></table></figure>
+<h3 id="336-代码主题风格"><a class="markdownIt-Anchor" href="#336-代码主题风格"></a> 3.3.6 代码主题风格</h3>
+<p>NexT主题提供了<code>normal | night | night eighties | night blue | night bright</code>五种风格的代码高亮主题</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">highlight_theme:</span> <span class="string">night</span> <span class="string">eighties</span></span><br></pre></td></tr></table></figure>
+<h3 id="337-访问量统计"><a class="markdownIt-Anchor" href="#337-访问量统计"></a> 3.3.7 访问量统计</h3>
+<p>这里使用的是不蒜子插件，本人配置如下：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">busuanzi_count:</span></span><br><span class="line">  <span class="comment"># count values only if the other configs are false</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># custom uv span for the whole site</span></span><br><span class="line"><span class="attr">  site_uv:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  site_uv_header:</span> <span class="string">&lt;i</span> <span class="string">class="fa</span> <span class="string">fa-user"&gt;&lt;/i&gt;</span> <span class="string">访客数</span></span><br><span class="line"><span class="attr">  site_uv_footer:</span> <span class="string">人次</span></span><br><span class="line">  <span class="comment"># custom pv span for the whole site</span></span><br><span class="line"><span class="attr">  site_pv:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  site_pv_header:</span> <span class="string">&lt;i</span> <span class="string">class="fa</span> <span class="string">fa-eye"&gt;&lt;/i&gt;</span> <span class="string">总访问量</span></span><br><span class="line"><span class="attr">  site_pv_footer:</span> <span class="string">次</span></span><br><span class="line">  <span class="comment"># custom pv span for one page only</span></span><br><span class="line"><span class="attr">  page_pv:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  page_pv_header:</span> <span class="string">&lt;i</span> <span class="string">class="fa</span> <span class="string">fa-file-o"&gt;&lt;/i&gt;</span> <span class="string">阅读数</span></span><br><span class="line"><span class="attr">  page_pv_footer:</span> <span class="string">次</span></span><br></pre></td></tr></table></figure>
+<p>暂时配置就这些，如果再有的话，会继续补充！</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="http://yangfch3.com/2016/05/08/hexo-experiences/hexo-renderer-marked-it.txt" target="_blank" rel="noopener">yangfch3.com/2016/05/08/hexo-experiences/hexo-renderer-marked-it.txt</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+
+    
+    
+    
+        
+      
+        <div id="reward-container">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/uploads/wechatpay.png" alt="Stick Cui 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/uploads/alipay.jpg" alt="Stick Cui 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Stick Cui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://stickcui.github.io/2017/09/24/hexo的安装之路/" title="hexo的安装之路">https://stickcui.github.io/2017/09/24/hexo的安装之路/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2017/09/20/Python中的图片矫正/" rel="next" title="Python中的图片矫正">
+                  <i class="fa fa-chevron-left"></i> Python中的图片矫正
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2017/09/26/LaTeX学习笔记/" rel="prev" title="LaTeX 学习笔记">
+                  LaTeX 学习笔记 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-前言"><span class="nav-number">1.</span> <span class="nav-text"> 1. 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-安装"><span class="nav-number">2.</span> <span class="nav-text"> 2. 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-依赖安装"><span class="nav-number">2.1.</span> <span class="nav-text"> 2.1 依赖安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-hexo-安装"><span class="nav-number">2.2.</span> <span class="nav-text"> 2.2 hexo 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-开始使用"><span class="nav-number">2.3.</span> <span class="nav-text"> 2.3 开始使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-安装主题"><span class="nav-number">2.4.</span> <span class="nav-text"> 2.4 安装主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-其他包的安装"><span class="nav-number">2.5.</span> <span class="nav-text"> 2.5 其他包的安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-配置"><span class="nav-number">3.</span> <span class="nav-text"> 3. 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#31-git-配置"><span class="nav-number">3.1.</span> <span class="nav-text"> 3.1 Git 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32-hexo-基本配置"><span class="nav-number">3.2.</span> <span class="nav-text"> 3.2 hexo 基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#321-站点相关配置"><span class="nav-number">3.2.1.</span> <span class="nav-text"> 3.2.1 站点相关配置：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#322-站点url配置"><span class="nav-number">3.2.2.</span> <span class="nav-text"> 3.2.2 站点URL配置：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#323-deploy配置"><span class="nav-number">3.2.3.</span> <span class="nav-text"> 3.2.3 Deploy配置：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#324-主题"><span class="nav-number">3.2.4.</span> <span class="nav-text"> 3.2.4 主题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#33-主题配置"><span class="nav-number">3.3.</span> <span class="nav-text"> 3.3 主题配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#331-菜单栏配置"><span class="nav-number">3.3.1.</span> <span class="nav-text"> 3.3.1 菜单栏配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#332-主题风格"><span class="nav-number">3.3.2.</span> <span class="nav-text"> 3.3.2 主题风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#333-个人社交链接"><span class="nav-number">3.3.3.</span> <span class="nav-text"> 3.3.3 个人社交链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#334-头像设置"><span class="nav-number">3.3.4.</span> <span class="nav-text"> 3.3.4 头像设置：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#335-打赏"><span class="nav-number">3.3.5.</span> <span class="nav-text"> 3.3.5 打赏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#336-代码主题风格"><span class="nav-number">3.3.6.</span> <span class="nav-text"> 3.3.6 代码主题风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#337-访问量统计"><span class="nav-number">3.3.7.</span> <span class="nav-text"> 3.3.7 访问量统计</span></a></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/uploads/avatar_stick.jpg"
+      alt="Stick Cui">
+  <p class="site-author-name" itemprop="name">Stick Cui</p>
+  <div class="site-description" itemprop="description">Everything is the begining.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/StickCui" title="GitHub &rarr; https://github.com/StickCui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stick Cui</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">17k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">15 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

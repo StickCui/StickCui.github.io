@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="1. 背景介绍 在团队或小组中，免不了会多人使用同一台服务器。由于是多人使用，机器的环境肯定是预先配置好了最基本的软件或工具，但对于单个用户来讲，这些工具很可能远远不足以满足要求。此时，便需要非root用户自己根据所需去安装个性化的应用或工具。有些工具可能比较好装，但是大部分软件或工具的安装，均需要管理员权限。此时，便需要一些技巧去避开这些权限的要求。">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux下非root用户安装软件至本地">
+<meta property="og:url" content="https://stickcui.github.io/2019/05/07/Linux下非root用户安装软件至本地/index.html">
+<meta property="og:site_name" content="Stick&#39;s Blog">
+<meta property="og:description" content="1. 背景介绍 在团队或小组中，免不了会多人使用同一台服务器。由于是多人使用，机器的环境肯定是预先配置好了最基本的软件或工具，但对于单个用户来讲，这些工具很可能远远不足以满足要求。此时，便需要非root用户自己根据所需去安装个性化的应用或工具。有些工具可能比较好装，但是大部分软件或工具的安装，均需要管理员权限。此时，便需要一些技巧去避开这些权限的要求。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-01T07:39:41.720Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux下非root用户安装软件至本地">
+<meta name="twitter:description" content="1. 背景介绍 在团队或小组中，免不了会多人使用同一台服务器。由于是多人使用，机器的环境肯定是预先配置好了最基本的软件或工具，但对于单个用户来讲，这些工具很可能远远不足以满足要求。此时，便需要非root用户自己根据所需去安装个性化的应用或工具。有些工具可能比较好装，但是大部分软件或工具的安装，均需要管理员权限。此时，便需要一些技巧去避开这些权限的要求。">
+  <link rel="canonical" href="https://stickcui.github.io/2019/05/07/Linux下非root用户安装软件至本地/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Linux下非root用户安装软件至本地 | Stick's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Stick's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">学习笔记</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://stickcui.github.io/2019/05/07/Linux下非root用户安装软件至本地/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Stick Cui">
+      <meta itemprop="description" content="Everything is the begining.">
+      <meta itemprop="image" content="/uploads/avatar_stick.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stick's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Linux下非root用户安装软件至本地
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-07 06:28:25" itemprop="dateCreated datePublished" datetime="2019-05-07T06:28:25+08:00">2019-05-07</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-01 15:39:41" itemprop="dateModified" datetime="2020-03-01T15:39:41+08:00">2020-03-01</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>2.1k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>2 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-背景介绍"><a class="markdownIt-Anchor" href="#1-背景介绍"></a> 1. 背景介绍</h1>
+<p>在团队或小组中，免不了会多人使用同一台服务器。由于是多人使用，机器的环境肯定是预先配置好了最基本的软件或工具，但对于单个用户来讲，这些工具很可能远远不足以满足要求。此时，便需要非root用户自己根据所需去安装个性化的应用或工具。有些工具可能比较好装，但是大部分软件或工具的安装，均需要管理员权限。此时，便需要一些技巧去避开这些权限的要求。</p>
+<a id="more"></a>
+<h1 id="2-python-工具包"><a class="markdownIt-Anchor" href="#2-python-工具包"></a> 2. Python 工具包</h1>
+<p>本章节有个前提就是不考虑Anaconda。</p>
+<p>Python 的工具包分为两类：一类是python-dev，python-pip等管理员已经安装好了的，另一类便是缺少这些必要的包的。前者好理解，这些都是python基础环境所必需的，管理员一般都会安装好。但是，不排除一些管理员默认只配置python2，对于python3不管不顾（系统是 Ubuntu 16.04 及以下）。</p>
+<h2 id="21-依赖包齐全"><a class="markdownIt-Anchor" href="#21-依赖包齐全"></a> 2.1 依赖包齐全</h2>
+<p>这种情况最好解决，加一个<code>--user</code>全解决：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install pkg --user</span><br></pre></td></tr></table></figure>
+<h2 id="22-依赖包缺失"><a class="markdownIt-Anchor" href="#22-依赖包缺失"></a> 2.2 依赖包缺失</h2>
+<p>首先，安装pip：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://bootstrap.pypa.io/get-pip.py</span><br><span class="line">python3 get-pip.py --user</span><br></pre></td></tr></table></figure>
+<p>搞定。</p>
+<p>以 Ubuntu 16.04 为例，在包管理网站，下载python-dev的deb包（注意不止一个，相关的都下载下来）。然后通过 <code>dpkg</code> 命令将这些 deb 文件解包:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -x package.deb &lt;pkg_dir&gt;</span><br></pre></td></tr></table></figure>
+<p>最后，在 <code>&lt;pkg_dir&gt;</code> 路径下，将解包好的程序或文件组织好，<code>mv</code> 到 <code>$HOME/.local</code> 文件夹下即可。</p>
+<p>注意，对于wheel格式的python包安装同 2.1 介绍的一样。但是，对于一些源码编译的包可能会有问题。因为，有些包可能会用到 <code>Python.h</code> 之类的头文件，在源码的 <code>setup.py</code> 中（其实是 setuptools 默认的）这些头文件都是默认在根目录下的。因此，需要修改 <code>setup.py</code> 文件，添加这些头文件路径以及一些 lib 路径。</p>
+<h1 id="3-cc-软件"><a class="markdownIt-Anchor" href="#3-cc-软件"></a> 3. C/C++ 软件</h1>
+<h2 id="31-源码编译"><a class="markdownIt-Anchor" href="#31-源码编译"></a> 3.1 源码编译</h2>
+<p>源码编译，咋都好说，按照官方的教程来就好，有些需要 <code>configure</code> 的，需要先执行 <code>configure</code>，记得配置 <code>PREFIX</code> 选在 <code>$HOME/.local</code> 即可。<br>
+有些可能是 CMake 的就更好设置了。</p>
+<h2 id="32-预编译的二进制包"><a class="markdownIt-Anchor" href="#32-预编译的二进制包"></a> 3.2 预编译的二进制包</h2>
+<p>对于预编译的二进制包，不同的 Linux 发行版有着不同的包管理工具。</p>
+<h3 id="321-ubuntu"><a class="markdownIt-Anchor" href="#321-ubuntu"></a> 3.2.1 Ubuntu</h3>
+<p>Ubuntu 的包管理工具为 apt，其可以在非 root 用户下下载制定的包，遗憾的是它不会像安装那样把所有依赖包都下载下来，需要手动的去下载所有依赖包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get download &lt;pkg-name&gt;</span><br></pre></td></tr></table></figure>
+<p>下载完所有的 deb 包后，接下来的工作同 2.2 节提到的。</p>
+<h3 id="322-centos"><a class="markdownIt-Anchor" href="#322-centos"></a> 3.2.2 CentOS</h3>
+<p>CentOS 的包管理工具为 yum，其除了查询等操作外，其他的操作均需要管理员权限。因此，这里指望不上它。（可能是我太挫了。）</p>
+<p>CentOS 的二进制预编译包为 apm 打包，因此可以效仿 deb 包那样，进行手动解包。此外，对于一些允许重定位（relocatable）的包还可以使用 <code>apm</code> 命令手动重定位安装，安装命令如下（本人不用 CentOS 尚未见过可重定位的包）<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh --nodeps &lt;pkg-name&gt;.rpm --prefix <span class="variable">$HOME</span>/.<span class="built_in">local</span></span><br></pre></td></tr></table></figure>
+<p>手动解包命令<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm2cpio &lt;pkg-name&gt;.rpm | cpio -idvm</span><br></pre></td></tr></table></figure>
+<h1 id="4-实战演练"><a class="markdownIt-Anchor" href="#4-实战演练"></a> 4. 实战演练</h1>
+<p>这里的实战是在 CentOS 系统下安装 R 软件。源码编译这一关我是死活过不去 <code>bzip2</code> 这个依赖的 check，源码编译可参考<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>。因此无奈选择了预编译包的安装。</p>
+<p>首先，确定 R 二进制包的位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list R</span><br></pre></td></tr></table></figure>
+<p>得到的结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">可安装的软件包</span><br><span class="line">R.x86_64            3.5.2-2.el6                 epel</span><br></pre></td></tr></table></figure>
+<p>OK，有就好了，在清华镜像源里的 epel 源里面找到了对应的一些列包，下载后，首先尝试 apm 安装，失败，因为 R 不允许重定向安装位置。<br>
+尝试解包安装：</p>
+<pre><code>1. 解包后，发现出现两个文件夹 `usr` 和 `etc`，其中，`usr/bin/R` 执行后报错，找不到 `/usr/lib64/R/etc/ldpaths`；
+2. 将 `usr` 整体 `mv` 到 `$HOME/.local` 下；
+3. 修改 `$HOME/.local/usr/bin/R` 文件中的 `R_HOME`, `R_HOME_DIR`等路径，改为现在的对应的本地路径；
+4. 同理修改 `$HOME/.local/usr/lib64/R/bin/R` 文件；
+5. 配置 `.bashrc` 文件，添加一行 `export PATH=$PATH:$HOME/.local/usr/bin`.
+</code></pre>
+<p>搞定，执行成功。</p>
+<h1 id="参考文献"><a class="markdownIt-Anchor" href="#参考文献"></a> 参考文献</h1>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="http://my.huhoo.net/archives/2010/09/rootrpm.html" target="_blank" rel="noopener">http://my.huhoo.net/archives/2010/09/rootrpm.html</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p><a href="https://blog.csdn.net/sdcxyz/article/details/47094221" target="_blank" rel="noopener">https://blog.csdn.net/sdcxyz/article/details/47094221</a> <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p><a href="https://zhuanlan.zhihu.com/p/28055351" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/28055351</a> <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+
+    
+    
+    
+        
+      
+        <div id="reward-container">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/uploads/wechatpay.png" alt="Stick Cui 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/uploads/alipay.jpg" alt="Stick Cui 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Stick Cui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://stickcui.github.io/2019/05/07/Linux下非root用户安装软件至本地/" title="Linux下非root用户安装软件至本地">https://stickcui.github.io/2019/05/07/Linux下非root用户安装软件至本地/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2017/09/26/LaTeX学习笔记/" rel="next" title="LaTeX 学习笔记">
+                  <i class="fa fa-chevron-left"></i> LaTeX 学习笔记
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-背景介绍"><span class="nav-number">1.</span> <span class="nav-text"> 1. 背景介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-python-工具包"><span class="nav-number">2.</span> <span class="nav-text"> 2. Python 工具包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-依赖包齐全"><span class="nav-number">2.1.</span> <span class="nav-text"> 2.1 依赖包齐全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-依赖包缺失"><span class="nav-number">2.2.</span> <span class="nav-text"> 2.2 依赖包缺失</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-cc-软件"><span class="nav-number">3.</span> <span class="nav-text"> 3. C/C++ 软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#31-源码编译"><span class="nav-number">3.1.</span> <span class="nav-text"> 3.1 源码编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32-预编译的二进制包"><span class="nav-number">3.2.</span> <span class="nav-text"> 3.2 预编译的二进制包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#321-ubuntu"><span class="nav-number">3.2.1.</span> <span class="nav-text"> 3.2.1 Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#322-centos"><span class="nav-number">3.2.2.</span> <span class="nav-text"> 3.2.2 CentOS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-实战演练"><span class="nav-number">4.</span> <span class="nav-text"> 4. 实战演练</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text"> 参考文献</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/uploads/avatar_stick.jpg"
+      alt="Stick Cui">
+  <p class="site-author-name" itemprop="name">Stick Cui</p>
+  <div class="site-description" itemprop="description">Everything is the begining.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/StickCui" title="GitHub &rarr; https://github.com/StickCui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stick Cui</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">17k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">15 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

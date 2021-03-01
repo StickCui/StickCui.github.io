@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Stick&#39;s Blog">
 <meta property="og:description" content="1. 背景介绍 C++在处理字符串时，常常会碰到宽字符（中日韩等非ACSII码字符），默认的标准库 std::string 处理的仅是 char 类型的字符串。通常，在 Unix/Linux 系统中，字符串是 UTF-8 编码的，此时，std::string 中存储的即为 UTF-8 编码后的结果。例如：“你好啊，Stick”，这句话中有 9 个字符，但实际存储在 std::string 中的内">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-03-01T07:14:28.902Z">
+<meta property="og:updated_time" content="2021-03-01T07:34:27.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++的宽字符处理">
 <meta name="twitter:description" content="1. 背景介绍 C++在处理字符串时，常常会碰到宽字符（中日韩等非ACSII码字符），默认的标准库 std::string 处理的仅是 char 类型的字符串。通常，在 Unix/Linux 系统中，字符串是 UTF-8 编码的，此时，std::string 中存储的即为 UTF-8 编码后的结果。例如：“你好啊，Stick”，这句话中有 9 个字符，但实际存储在 std::string 中的内">
@@ -260,7 +260,7 @@
                 
               
 
-              <time title="创建时间：2021-03-01 12:03:41 / 修改时间：15:14:28" itemprop="dateCreated datePublished" datetime="2021-03-01T12:03:41+08:00">2021-03-01</time>
+              <time title="创建时间：2021-03-01 12:03:41 / 修改时间：15:34:27" itemprop="dateCreated datePublished" datetime="2021-03-01T12:03:41+08:00">2021-03-01</time>
             </span>
           
             
@@ -328,13 +328,13 @@
 <ol>
 <li>
 <p><code>std::mbstowcs</code><br>
-该函数定义在 <cstdlib> 头文件中，是一个 C 函数，通常配合 <clocale> 头文件中的 <code>std::setlocale</code> 使用，设置当前系统编码，将当前编码的字符串，转换为宽字符串。</clocale></cstdlib></p>
+该函数定义在 <code>&lt;cstdlib&gt;</code> 头文件中，是一个 C 函数，通常配合 <code>&lt;clocale&gt;</code> 头文件中的 <code>std::setlocale</code> 使用，设置当前系统编码，将当前编码的字符串，转换为宽字符串。</p>
  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::setlocale(LC_ALL, <span class="string">"en_US.utf8"</span>);</span><br><span class="line"><span class="keyword">char</span> * str = <span class="string">"\xe4\xbd\xa0\xe5\xa5\xbd\xe5\x95\x8a\xef\xbc\x8cStick"</span>;</span><br><span class="line"><span class="keyword">wchar_t</span> wstr[<span class="number">10</span>];</span><br><span class="line"><span class="built_in">std</span>::mbstowcs(wstr, str, <span class="number">9</span>);</span><br></pre></td></tr></table></figure>
 <p>该方法，在gcc 4以及更高版本中均可使用。缺点是，跨平台可能会出现问题。例如，同样的代码在 Linux 下运行良好。到了 Windows 下的 MinGW64 下就会出现问题。此外，该方法只能转换一般的宽字符，对于一些超宽字符如“𠀳”(U+20033) 则无法表示，需要使用 <code>char32_t</code> 类型才能表示。</p>
 </li>
 <li>
 <p><code>std::wstring_convert</code><br>
-该函数定义在  <locale> 头文件中，通常配合 <codecvt> 头文件的 <code>std::codecvt_utf8</code> 函数使用。</codecvt></locale></p>
+该函数定义在  <code>&lt;locale&gt;</code> 头文件中，通常配合 <code>&lt;codecvt&gt;</code> 头文件的 <code>std::codecvt_utf8</code> 函数使用。</p>
  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::wstring_convert&lt;<span class="built_in">std</span>::codecvt_utf8&lt;<span class="keyword">wchar_t</span>&gt;, <span class="keyword">wchar_t</span>&gt; convertor;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> str = <span class="string">"\xe4\xbd\xa0\xe5\xa5\xbd\xe5\x95\x8a\xef\xbc\x8cStick"</span></span><br><span class="line"><span class="built_in">std</span>::wstring wstr = convertor.from_bytes(str);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> nstr = convertor.to_bytes(wstr);</span><br></pre></td></tr></table></figure>
 <p>该方法，实用性很强，能够跨平台使用（MinGW64 测试正常），而且针对超宽字符也能够顺利转换，只需要将上述代码中的 <code>wchar_t</code> 修改为 <code>char32_t</code>，<code>std::wstring</code> 修改为 <code>std::u32string</code> 即可。缺点是对 gcc 版本有要求，必须为 gcc 5.0 及以上版本才可以，且 <code>-std</code>  参数必须设置为 c++11 及以上版本才可。</p>
 </li>
